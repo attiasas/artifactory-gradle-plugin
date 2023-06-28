@@ -39,7 +39,7 @@ pipelines:
             # Run audit
             - jf audit --fail=false
 
-            # Delete former snapshots to make sure the .jfrog-pipeline bundle will not contain the same artifacts
+            # Delete former snapshots to make sure the .jfrog-pipelines bundle will not contain the same artifacts
             - jf rt del "ecosys-oss-snapshot-local/com/jfrog/buildinfo/build-info-extractor-gradle/*" --quiet
 
             # Run test, build and publish snapshot
@@ -52,9 +52,9 @@ pipelines:
             - jf rt bag && jf rt bce
             - jf rt bp
 
-            # Distribute .jfrog-pipeline bundle
-            - jf ds rbc ecosystem-artifactory_gradle_plugin-snapshot $run_number --spec=./.jfrog-pipeline/specs/dev-rbc-filespec.json --sign
-            - jf ds rbd ecosystem-artifactory_gradle_plugin-snapshot $run_number --site="releases.jfrog.io" --sync
+            # Distribute .jfrog-pipelines bundle
+            - jf ds rbc ecosystem-artifactory_gradle_plugin-snapshot $run_number --spec=./.jfrog-pipelines/specs/dev-rbc-filespec.json --sign
+            - jf ds rbd ecosystem-artifactory_gradle_plugin-snapshot $run_number --site="release.jfrog.io" --sync
 
           onComplete:
             # Save gradle cache
